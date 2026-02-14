@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Para Daymi 💜</title>
 
 <style>
@@ -245,11 +246,31 @@ button:hover{
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     animation: zoom .7s ease;
+    max-width: 520px;
 }
 
 @keyframes zoom{
     from{ transform: scale(.7); opacity:0; }
     to{ transform: scale(1); opacity:1; }
+}
+
+#poemaFinal{
+    text-align:left;
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    font-size:16px;
+    line-height:1.7;
+    white-space:pre-line;
+    opacity:.95;
+}
+
+#firmaFinal{
+    margin-top: 14px;
+    font-size: 16px;
+    opacity: .95;
+    text-align: right;
+    white-space: nowrap;
 }
 
 /* CORAZONES DE FONDO */
@@ -291,6 +312,14 @@ button:hover{
         opacity:0;
     }
 }
+
+/* RESPONSIVE */
+@media (max-width: 480px){
+  .sobre{ width: 92vw; height: 320px; }
+  .carta{ width: 82vw; padding: 22px; }
+  .carta h2{ font-size: 22px; }
+  .carta p{ font-size: 15px; }
+}
 </style>
 </head>
 
@@ -326,34 +355,21 @@ button:hover{
     </div>
 </div>
 
+<!-- FINAL CON POEMA + FIRMA -->
 <div class="final" id="final">
-    <div class="final-texto">
-        💖 Obvio que sí, soy el mejor bb muakk!! 💖
-            Te quiero sin teatro ni promesas,
-         como se quiere al pan cuando hace frío,
-        como se entiende el mar por su paciencia
-          y el sol por su manera de estar vivo.
-
-           Te quiero en lo que no hace ruido:
-        en el “¿ya comiste?”, en el “te espero”,
-          en el abrazo que arregla el mundo
-          sin preguntar primero por el tiempo.
-
-        Si un día se nos cansa la esperanza,
-         si la vida nos muerde la semana,
-           yo te haré sitio en mi pecho
-        como quien guarda luz dentro de casa.
-
-      Porque amar, para mí, no es un incendio:
-        es fuego que se cuida y no se apura,
-          es aprender tu nombre cada día
-         como si el corazón lo pronunciara.
-
-      Y cuando el miedo venga con sus dudas,
-       yo voy a ser tu calma y tu camino:
-      no te prometo el cielo, amor, te juro
-       que te acompaño — y eso es infinito.
+  <div class="final-texto">
+    <div id="mensajeFinal" style="margin-bottom:14px;">
+      💖 Te quiero mucho! 💖
     </div>
+
+    <div id="poemaFinal"></div>
+
+    <div id="firmaFinal">De tu amado Johan 🐼</div>
+
+    <div style="margin-top:18px; font-size:14px; opacity:.85;">
+      (toca para cerrar) 💜
+    </div>
+  </div>
 </div>
 
 <audio id="musica" loop>
@@ -363,15 +379,51 @@ button:hover{
 <script>
 const audio = document.getElementById("musica");
 
-function activar(){
-    audio.play();
+async function activar(){
+  try{
+    audio.volume = 0.7;
+    await audio.play();
     document.getElementById("tap").style.display="none";
+  }catch(e){
+    alert("Toca otra vez para activar la música 💜");
+  }
 }
 
+const poema = `Te quiero sin teatro ni promesas,
+como se quiere al pan cuando hace frío,
+como se entiende el mar por su paciencia
+y el sol por su manera de estar vivo.
+
+Te quiero en lo que no hace ruido:
+en el “¿ya comiste?”, en el “te espero”,
+en el abrazo que arregla el mundo
+sin preguntar primero por el tiempo.
+
+Si un día se nos cansa la esperanza,
+si la vida nos muerde la semana,
+yo te haré sitio en mi pecho
+como quien guarda luz dentro de casa.
+
+Porque amar, para mí, no es un incendio:
+es fuego que se cuida y no se apura,
+es aprender tu nombre cada día
+como si el corazón lo pronunciara.
+
+Y cuando el miedo venga con sus dudas,
+yo voy a ser tu calma y tu camino:
+no te prometo el cielo, amor, te juro
+que te acompaño — y eso es infinito.`;
+
 function respuesta(){
+    document.getElementById("poemaFinal").textContent = poema;
     document.getElementById("final").classList.add("activo");
     explosionCorazones();
 }
+
+/* Cerrar al tocar el overlay final */
+document.getElementById("final").addEventListener("click", () => {
+  document.getElementById("final").classList.remove("activo");
+});
 
 /* MUCHOS CORAZONES DE FONDO */
 function crearCorazon(){
@@ -422,5 +474,3 @@ function explosionCorazones(){
 
 </body>
 </html>
-
-
