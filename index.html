@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Para Daymi 💜</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Georgia', serif;
+    background: radial-gradient(circle at top, #b983ff, #5e17eb 60%, #3d0a7a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    color:#4b0082;
+    position:relative;
+}
+
+/* 🐼 PANDITAS CAMUFLADOS (VISIBLES PERO SUAVES) */
+body::after{
+    content:"🐼   🐼   🐼   🐼   🐼   🐼   🐼   🐼   🐼";
+    position:absolute;
+    inset:-50%;
+    font-size:46px;
+    line-height:120px;
+    opacity:0.14;
+    transform: rotate(-25deg);
+    white-space:pre-wrap;
+    pointer-events:none;
+    z-index:0;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.25));
+}
+
+/* LUZ DE FONDO */
+body::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+    top:-250px;
+    left:-250px;
+    animation: moverLuz 10s infinite alternate ease-in-out;
+    z-index:0;
+}
+
+@keyframes moverLuz{
+    from{ transform: translate(0,0); }
+    to{ transform: translate(250px,180px); }
+}
+
+/* =========================
+   ANIMACIÓN TIPO CARTA/SOBRE
+   ========================= */
+
+/* CONTENEDOR SOBRE */
+.sobre{
+    position: relative;
+    width: 420px;
+    height: 340px;
+    z-index: 2;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    animation: flotar 3.5s ease-in-out infinite;
+}
+
+@keyframes flotar{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-8px); }
+}
+
+/* CUERPO DEL SOBRE */
+.sobre::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:22px;
+    background: linear-gradient(135deg, #f3e7ff, #ffffff 60%);
+    box-shadow:0 25px 60px rgba(0,0,0,0.4);
+    z-index:1;
+}
+
+/* PLIEGUES DEL SOBRE */
+.sobre::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height: 72%;
+    border-radius: 0 0 22px 22px;
+    background:
+      linear-gradient(135deg, transparent 49%, rgba(106,13,173,0.12) 50%) left/50% 100% no-repeat,
+      linear-gradient(225deg, transparent 49%, rgba(106,13,173,0.12) 50%) right/50% 100% no-repeat;
+    z-index:2;
+}
+
+/* TAPA DEL SOBRE */
+.tapa{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:58%;
+    background: linear-gradient(135deg, #e6d2ff, #ffffff);
+    clip-path: polygon(0 0, 100% 0, 50% 95%);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    z-index:4;
+    animation: abrirTapa 1.2s ease forwards;
+    animation-delay: .35s;
+    box-shadow: inset 0 -10px 30px rgba(106,13,173,0.10);
+    backface-visibility: hidden;
+}
+
+@keyframes abrirTapa{
+    0%{ transform: rotateX(0deg); }
+    100%{ transform: rotateX(155deg); }
+}
+
+/* CARTA (SALE DEL SOBRE) */
+.carta{
+    background:#fff;
+    width:360px;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    position:relative;
+    z-index:3;
+
+    /* Animación de salida */
+    transform: translateY(120px) scale(0.98);
+    opacity:0;
+    animation: salirCarta 1.2s cubic-bezier(.2,.9,.2,1) forwards;
+    animation-delay: .95s;
+}
+
+@keyframes salirCarta{
+    0%{ transform: translateY(120px) scale(0.98); opacity:0; }
+    60%{ opacity:1; }
+    100%{ transform: translateY(-10px) scale(1); opacity:1; }
+}
+
+.carta h2{
+    margin-top:0;
+    font-size:26px;
+}
+
+.carta p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+/* 🐼 PANDITAS PAREJA */
+.panditas{
+    margin: 12px 0 10px;
+    font-size: 32px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    user-select:none;
+    animation: panditasLatido 1.8s ease-in-out infinite;
+}
+
+@keyframes panditasLatido{
+    0%,100%{ transform: scale(1); }
+    50%{ transform: scale(1.08); }
+}
+
+/* BOTONES */
+button{
+    margin:10px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+@keyframes brillo{
+    0%{ box-shadow:0 0 5px #fff; }
+    50%{ box-shadow:0 0 25px #d8b4ff; }
+    100%{ box-shadow:0 0 5px #fff; }
+}
+
+.si{
+    background:#6a0dad;
+    color:white;
+    animation: brillo 2s infinite;
+}
+
+.claro{
+    background:#d8b4ff;
+    color:#4b0082;
+    font-weight:bold;
+    animation: brillo 2s infinite;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* TAP */
+.tap{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: rgba(94,23,235,0.9);
+    color:white;
+    font-size:20px;
+    z-index:10;
+    cursor:pointer;
+}
+
+/* FINAL */
+.final{
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.85);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .6s ease;
+    z-index:20;
+}
+
+.final.activo{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.final-texto{
+    color:white;
+    font-size:28px;
+    text-align:center;
+    padding:35px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    animation: zoom .7s ease;
+}
+
+@keyframes zoom{
+    from{ transform: scale(.7); opacity:0; }
+    to{ transform: scale(1); opacity:1; }
+}
+
+/* CORAZONES DE FONDO */
+.corazon{
+    position:absolute;
+    bottom:-30px;
+    pointer-events:none;
+    animation: subir linear infinite;
+    z-index:0;
+}
+
+@keyframes subir{
+    0%{
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity:0;
+    }
+    20%{ opacity:0.8; }
+    100%{
+        transform: translateY(-120vh) translateX(var(--mov)) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* EXPLOSIÓN */
+.explosion{
+    position:fixed;
+    font-size:28px;
+    animation: explotar 1.6s ease forwards;
+    z-index:30;
+}
+
+@keyframes explotar{
+    0%{
+        transform: translate(-50%, -50%) scale(.6);
+        opacity:1;
+    }
+    100%{
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.8);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="tap" id="tap" onclick="activar()">
+    💜 Toca la pantalla mi morenita 💜
+</div>
+
+<!-- SOBRE + CARTA -->
+<div class="sobre">
+    <div class="tapa"></div>
+
+    <div class="carta">
+        <h2>Mi querida Daymi 💜</h2>
+        <p>
+        Desde el momento en que llegaste a mi vida,
+        todo cambió para mejor.
+        Tu sonrisa ilumina mis días,
+        tu voz calma mis pensamientos,
+        y tu presencia hace que todo tenga sentido.
+        </p>
+
+        <p>Hoy quiero preguntarte algo desde el corazón…</p>
+
+        <h3>💌 ¿Quieres ser mi San Valentín? 💌</h3>
+
+        <!-- 🐼 Panditas pareja entre el texto y las opciones -->
+        <div class="panditas">🐼💜🐼</div>
+
+        <button class="si" onclick="respuesta()">Sí 💜</button>
+        <button class="claro" onclick="respuesta()">Claro que sí 🤍</button>
+    </div>
+</div>
+
+<div class="final" id="final">
+    <div class="final-texto">
+        💖 Obvio que sí, soy el mejor bb muakk!! 💖
+    </div>
+</div>
+
+<audio id="musica" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("musica");
+
+function activar(){
+    audio.play();
+    document.getElementById("tap").style.display="none";
+}
+
+function respuesta(){
+    document.getElementById("final").classList.add("activo");
+    explosionCorazones();
+}
+
+/* MUCHOS CORAZONES DE FONDO */
+function crearCorazon(){
+    const c = document.createElement("div");
+    c.className = "corazon";
+
+    const corazones = ["💜","🤍","💖","💗"];
+    c.innerHTML = corazones[Math.floor(Math.random()*corazones.length)];
+
+    c.style.left = Math.random()*100 + "vw";
+
+    let size = 12 + Math.random()*28;
+    c.style.fontSize = size + "px";
+
+    let duracion = 5 + Math.random()*6;
+    c.style.animationDuration = duracion + "s";
+
+    let movimiento = (Math.random()*200 - 100) + "px";
+    c.style.setProperty('--mov', movimiento);
+
+    c.style.opacity = 0.3 + Math.random()*0.7;
+
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), duracion*1000);
+}
+setInterval(crearCorazon, 200);
+
+/* EXPLOSIÓN GRANDE */
+function explosionCorazones(){
+    for(let i=0;i<80;i++){
+        const e = document.createElement("div");
+        e.className="explosion";
+        e.innerHTML = Math.random() > 0.5 ? "💜" : "💖";
+        e.style.left = (window.innerWidth/2) + "px";
+        e.style.top = (window.innerHeight/2) + "px";
+
+        let x = (Math.random()*700 - 350) + "px";
+        let y = (Math.random()*700 - 350) + "px";
+
+        e.style.setProperty('--x', x);
+        e.style.setProperty('--y', y);
+
+        document.body.appendChild(e);
+        setTimeout(()=>e.remove(),1600);
+    }
+}
+</script>
+
+</body>
+</html>
